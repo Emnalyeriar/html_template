@@ -1,4 +1,4 @@
-html_template
+HTML5 TEMPLATE
 =============
 
-my own custom html template
+My own HTML5 template.
