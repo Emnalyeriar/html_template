@@ -8,11 +8,15 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
+    swig = require('gulp-swig'),
     del = require('del'),
     webserver = require('gulp-webserver');
 
+swig({'defaults': {'cache': false}});
+
 gulp.task('styles', function() {
     return gulp.src('styles/**/*')
+    .pipe(concat('main.css'))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(minifycss())
     .pipe(rename({suffix: '.min'}))
@@ -51,6 +55,7 @@ gulp.task('fonts', function() {
 
 gulp.task('templates', function() {
     return gulp.src('templates/**/*')
+    .pipe(swig())
     .pipe(gulp.dest('./_build/'))
 })
 
