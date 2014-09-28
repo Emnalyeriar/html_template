@@ -3,14 +3,15 @@ var gulp = require('gulp'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
-    imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     swig = require('gulp-swig'),
     del = require('del'),
-    webserver = require('gulp-webserver');
+    webserver = require('gulp-webserver'),
+    imagemin = require('gulp-imagemin'),
+    pngcrush = require('imagemin-pngcrush');
 
 swig({'defaults': {'cache': false}});
 
@@ -40,7 +41,11 @@ gulp.task('libs', function() {
 
 gulp.task('images', function() {
     return gulp.src('images/**/*')
-    .pipe(cache(imagemin({optimizationLevel: 3, progessive: true, interlaced: true})))
+    .pipe(imagemin({
+        progressive: true,
+        svgoPlugins: [{removeViewBox: false}],
+        use: [pngcrush()]
+    }))
     .pipe(gulp.dest('./_build/images/'))
 });
 
@@ -57,7 +62,7 @@ gulp.task('templates', function() {
     return gulp.src('templates/**/*')
     .pipe(swig())
     .pipe(gulp.dest('./_build/'))
-})
+});
 
 gulp.task('server', function() {
     return gulp.src('')
@@ -65,7 +70,7 @@ gulp.task('server', function() {
         livereload: true,
         directoryListing: true
     }))
-})
+});
 
 gulp.task('watch', function() {
     gulp.watch('styles/**/*', ['styles'])
