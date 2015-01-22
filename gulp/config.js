@@ -20,8 +20,8 @@ module.exports = {
     },
 
     'views': {
-        'src': 'templates/**/*.html',
-        'dest': 'build/js'
+        'src': ['templates/**/*.html', '!./templates/{partials,partials/**}'],
+        'dest': 'build'
     },
 
     'dist': {
