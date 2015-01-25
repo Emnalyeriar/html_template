@@ -3,7 +3,7 @@
 var gulp        = require('gulp');
 var runSequence = require('run-sequence');
 
-gulp.task('dev', function(cb){
+gulp.task('default', function(cb){
     cb = cb || function(){};
-    runSequence('styles', 'images', 'views', 'browserify', 'watch', cb);
+    runSequence('fonts', 'styles', 'images', 'views', 'browserify', 'watch', cb);
 });

@@ -5,31 +5,37 @@ module.exports = {
     'serverport': 3000,
 
     'styles': {
-        'src' : 'styles/**/*.scss',
-        'dest': 'build/css'
+        'src' : 'styles/*.scss',
+        'dest': '_build/css'
     },
 
     'scripts': {
         'src' : 'js/**/*.js',
-        'dest': 'build/js'
+        'dest': '_build/js'
+    },
+
+    'fonts': {
+        'src' : 'fonts/**/*',
+        'dest': '_build/fonts'
     },
 
     'images': {
         'src' : 'images/**/*',
-        'dest': 'build/images'
+        'dest': '_build/images'
     },
 
     'views': {
-        'src': ['templates/**/*.html', '!./templates/{partials,partials/**}'],
-        'dest': 'build'
+        'watch': './templates/**/*.html',
+        'src': ['./templates/**/*.html', '!./templates/{partials,partials/**}'],
+        'dest': '_build'
     },
 
     'dist': {
-        'root'  : 'build'
+        'root'  : '_build'
     },
 
     'browserify': {
-        'entries'   : 'scripts/main.js',
+        'entries'   : './scripts/main.js',
         'bundleName': 'main.js'
     }
 

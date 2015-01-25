@@ -19,12 +19,10 @@ function build(file){
         fullPaths: true
     }, watchify.args)
 
-    bundler.watchify(bundler);
+    bundler = watchify(bundler);
     bundler.on('update', function(){
        rebundle();
     });
-
-    bundler.transform('brfs');
 
     function rebundle(){
         var stream = bundler.bundle();

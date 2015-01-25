@@ -3,7 +3,7 @@
 var config   = require('../config');
 var changed  = require('gulp-changed');
 var gulp     = require('gulp');
-var imagemin = require('imagemin');
+var imagemin = require('gulp-imagemin');
 
 gulp.task('images', function(){
 
@@ -12,6 +12,6 @@ gulp.task('images', function(){
     return gulp.src(config.images.src)
         .pipe(changed(dest))
         .pipe(imagemin())
-        .pipe(gulp.dset(dest));
+        .pipe(gulp.dest(dest));
 
 });

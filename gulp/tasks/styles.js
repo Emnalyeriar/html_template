@@ -6,17 +6,22 @@ var sass         = require('gulp-sass');
 var gulpif       = require('gulp-if');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
+var cssGlobbing  = require('gulp-css-globbing');
 
 gulp.task('styles', function(){
 
     return gulp.src(config.styles.src)
+        .pipe(cssGlobbing({
+            extensions: ['.css', '.scss']
+        }))
         .pipe(sass({
+            includePaths: './styles',
             sourceComments: 'map',
             sourceMaps: 'sass',
-            outputStyle: 'nested'
+            outputStyle: 'compact'
         }))
         .pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))
         .pipe(gulp.dest(config.styles.dest))
-        .pipe(gulpif(browserSync.active), browserSync.reload({stream: true}));
+        .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
 
 });
