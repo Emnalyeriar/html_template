@@ -1,6 +1,3 @@
-(function() {
-    var fun = function() {
-        console.log('123');
-    };
-    fun();
-})();
+'use strict';
+
+var jQuery = require('jquery');
